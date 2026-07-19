@@ -34,6 +34,11 @@ def handler(event, context):
     payload = json.loads(body)
     print(json.dumps(payload))
 
+    cloneurl = payload['repository']['clone_url']
+    print(cloneurl)
+    headCommitID = payload['repository']['head_commit']['id']
+    print(headCommitID)
+
     return {
         "statusCode": 200,
         "headers": {"Content-Type": "application/json"},

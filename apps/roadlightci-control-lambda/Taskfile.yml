@@ -1,0 +1,20 @@
+version: '3'
+
+tasks:
+  default:
+    cmds:
+      - rm -rf dist dist.zip build *.egg-info
+      - uv export --frozen --no-dev --no-editable -o dist/requirements.txt
+      - |
+        uv pip install --no-cache \
+        --no-installer-metadata \
+        --no-compile-bytecode \
+        --python 3.13 \
+        --python-platform aarch64-manylinux2014 \
+        --target dist \
+        -r dist/requirements.txt
+      - |
+        cd dist
+        zip -r ../dist.zip .
+        cd ..
+      - rm -rf dist build *.egg-info
